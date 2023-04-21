@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&family=Kumbh+Sans:wght@400;700&display=swap');
+
+$Darkcyan: hsl(185, 75%, 39%);
+$Verydarkdesaturatedblue: hsl(229, 23%, 23%);
+$Darkgrayishblue: hsl(227, 10%, 46%);
+$Darkgray: hsl(0, 0%, 59%);
+$Fontsize : 18px;
+$ffamily : 'Kumbh Sans', sans-serif;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-size: 1rem;
+    font-family: $ffamily;
+    letter-spacing: .05rem;
+}
+@mixin  absimg($value) {
+    position: absolute;
+    width: 50%;
+    z-index: -1;
+    @if $value {
+        top: -50%;
+        left: 0;
+    }@else {
+        bottom: -50%;
+        right: 0;
+    }
+}
+.imgtop {
+    @include absimg(true);
+}
+
+.imgbottom {
+    @include absimg(false);
+}
+
+
+@mixin flexBox($v,$g) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @if $v{
+        flex-direction: row;
+        gap: $g;
+    }@else {
+        flex-direction: column;
+        gap: $g;
+    }
+    @if $g == sevenly {
+        justify-content: space-evenly;
+    }
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background: $Darkcyan;
+    z-index: -2;
+    @include flexBox(true,0);
+    header {
+        @include flexBox(false,.4rem);
+        max-width: 350px;
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: -2.5px 2.5px 50px rgba(0, 0, 0, 0.189);
+        .bgimage {
+            width: 100%;
+            height: auto;
+            img {
+                border-radius: 18px 18px 0 0;
+                width: 100%;
+            }
+        }
+        .ppimage {
+            width: 100% / 3;
+            img {
+                width: 100%;
+                margin-top: -50%;
+                border: 5px solid #fff;
+                border-radius: 50%;
+            }
+        }
+        h1 {
+            width: 100%;
+            @include flexBox(true,.6rem);
+            color: $Verydarkdesaturatedblue;
+            font-size: $Fontsize;
+            font-weight: 700;
+            span:last-child {
+                color: $Darkgrayishblue;
+            }
+        }
+        h4 {
+            font-weight: 100;
+            color: $Darkgrayishblue;
+            margin-bottom: 2rem;
+        }
+        .hr {
+            width: 100%;
+            border-bottom: 1px solid $Darkgray;
+        }
+        ul {
+            width: 100%;
+            @include flexBox(true,sevenly);
+            padding-bottom: 1.5rem;
+            padding-top: 1rem;
+            li {
+                @include flexBox(false,.3rem);
+                span:first-child {
+                    font-size: $Fontsize;
+                    font-weight: 700;
+                    color: $Verydarkdesaturatedblue;
+                }
+                span:last-child {
+                    font-size: 14px;
+                    font-size: 400;
+                    color: $Darkgrayishblue;
+                }
+            }
+        }
+    }
+}
+
+footer {
+    @include flexBox(true,1rem);
+    padding: .4rem 0;
+    p {
+        @include flexBox(true,.4rem);
+        span, a {
+            font-size: .8rem;
+        }
+        span {
+            color: $Darkgrayishblue;
+        }
+        a {
+            color: $Verydarkdesaturatedblue;
+            transition: .3s;
+            &:hover {
+                color: $Darkcyan;
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+@media (max-width:600px) {
+    .container {
+        padding: 1rem 0;
+        header {
+            max-width: 300px;
+        }
+    }
+    .imgtop, .imgbottom  {
+        width: 100%;
+        }
+    .imgtop {
+        left: -20%;
+        top: -20%;
+    }
+    .imgbottom {
+        right: -20%;
+        bottom: -20%;
+    }
+    footer {
+        @include flexBox(false,.3rem);
+    }
+}
